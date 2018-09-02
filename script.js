@@ -1,6 +1,6 @@
 window.onload = function () {
 
-  var url = "https://randomuser.me/apidfdffdfsdsdsd";
+  var url = "https://randomuser.me/api";
   var fullnameDisp = this.document.querySelector('#fullname');
   var avatar = this.document.querySelector('#avatar');
   var username = this.document.querySelector('#username');
@@ -13,9 +13,7 @@ window.onload = function () {
     .then(handleErrors)
     .then(parseJSON)
     .then(updateProfile)
-    .catch(function (err) {
-      console.log(err);
-    });
+    .catch(displayErrors);
   // });
 
   function parseJSON(res) {
@@ -35,10 +33,15 @@ window.onload = function () {
   }
 
   function handleErrors(res) {
-    if(!res.ok) {
+    if (!res.ok) {
       throw Error(res.status);
     }
     return res;
+  }
+
+  function displayErrors(err) {
+    console.log('INSIDE displayErrors');
+    console.log(err);
   }
 
 }
